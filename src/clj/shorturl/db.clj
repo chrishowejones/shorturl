@@ -36,6 +36,8 @@
       :url))
 
 (comment
+  mysql-db
+
   (query (-> (select :*)
              (from :redirects)
              (sql/format)))
@@ -45,7 +47,4 @@
                 [["abc" "https://github.com/seancorfield/honeysql"]])
                (sql/format)))
   (insert-redirect! "xyz" "https://github.com/clojure/java.jdbc")
-  (get-url "abc"))
-
-
-
+  (get-url "xyz"))
