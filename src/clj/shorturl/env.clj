@@ -8,4 +8,6 @@
 (comment
   (name :HOME)
   (env :HOME)
-  (System/getenv "HOME"))
+  (System/getenv "HOME")
+  envvars
+  )

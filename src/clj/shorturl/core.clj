@@ -5,7 +5,8 @@
             [muuntaja.core :as m]
             [reitit.ring.middleware.muuntaja :as muuntaja]
             [shorturl.db :as db]
-            [shorturl.slug :refer [generate-slug]]))
+            [shorturl.slug :refer [generate-slug]]
+            [clojure.java.io :as io]))
 
 ;; https://github.com/alndvz/vid4
 
@@ -22,14 +23,18 @@
     (db/insert-redirect! slug url)
     (r/response (str "create slug " slug))))
 
+(defn index []
+  (slurp (io/resource "public/index.html")))
+
 (def app
   (ring/ring-handler
    (ring/router
     ["/"
      [":slug/" redirect]
      ["api/"
-      ["redirect/" {:post create-redirect}]]
-     ["" {:handler (fn [req] {:body "Create redirect screen" :status 200})}]]
+      ["redirect/" {:post create-redirect}]
+      ["assets/*" (ring/create-resource-handler {:root "public/assets"})]]
+     ["" {:handler (fn [req] {:body (index) :status 200})}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
 
