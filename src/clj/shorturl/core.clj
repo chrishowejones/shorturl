@@ -20,8 +20,9 @@
 (defn create-redirect [req]
   (let [url (get-in req [:body-params :url])
         slug (generate-slug)]
+    (println "url = " url)
     (db/insert-redirect! slug url)
-    (r/response (str "create slug " slug))))
+    (r/response {:slug slug})))
 
 (defn index []
   (slurp (io/resource "public/index.html")))
@@ -32,8 +33,8 @@
     ["/"
      [":slug/" redirect]
      ["api/"
-      ["redirect/" {:post create-redirect}]
-      ["assets/*" (ring/create-resource-handler {:root "public/assets"})]]
+      ["redirect/" {:post create-redirect}]]
+     ["assets/*" (ring/create-resource-handler {:root "public/assets"})]
      ["" {:handler (fn [req] {:body (index) :status 200})}]]
     {:data {:muuntaja m/instance
             :middleware [muuntaja/format-middleware]}})))
