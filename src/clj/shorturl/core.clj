@@ -6,7 +6,8 @@
             [reitit.ring.middleware.muuntaja :as muuntaja]
             [shorturl.db :as db]
             [shorturl.slug :refer [generate-slug]]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io])
+  (:gen-class))
 
 ;; https://github.com/alndvz/vid4
 
@@ -20,7 +21,6 @@
 (defn create-redirect [req]
   (let [url (get-in req [:body-params :url])
         slug (generate-slug)]
-    (println "url = " url)
     (db/insert-redirect! slug url)
     (r/response {:slug slug})))
 
@@ -43,6 +43,11 @@
   (ring-jetty/run-jetty #'app {:port  3001
                                :join? false}))
 
-(def server (start))
+(defn -main []
+  (println "Starting app!")
+  (start))
 
-(.stop server)
+(comment
+ (def server (start))
+
+ (.stop server))

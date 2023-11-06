@@ -22,7 +22,7 @@
         redirect-link (str (.-origin js/location) "/" (:slug state) "/")]
     (d/div {:class-name "bg-pink-100 grid place-items-center h-screen"}
      (if (and (:slug state) (not= "" (:slug state)))
-       (d/div (d/a {:href redirect-link} redirect-link))
+       (d/div (d/a {:href redirect-link :target "_blank"} redirect-link))
        (d/div
         (d/div
          {:class-name "py-5"}
@@ -40,7 +40,6 @@
 
 ;; start your app with your favorite React renderer
 (defonce root (rdom/createRoot (js/document.getElementById "app")))
-
 
 (defn ^:export init []
   (.render root ($ app)))

@@ -11,4 +11,6 @@
  {:cljs
   {:extra-deps {thheller/shadow-cljs {:mvn/version "2.25.10"}
                 lilactown/helix {:mvn/version "0.2.0"}
-                funcool/promesa {:mvn/version "11.0.678"}}}}}
+                funcool/promesa {:mvn/version "11.0.678"}}}
+  :build {:deps {io.github.clojure/tools.build {:git/tag "v0.9.6" :git/sha "8e78bcc"}}
+          :ns-default build}}}
