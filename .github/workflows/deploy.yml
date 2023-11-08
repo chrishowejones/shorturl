@@ -13,7 +13,7 @@ jobs:
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@v1.0.0
       with:
-        host: http://88.80.189.81/
+        host: 88.80.189.81
         username: root
         password: ${{ secrets.LINODE_PASSWORD }}
         port: 22
