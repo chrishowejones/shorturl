@@ -20,7 +20,7 @@
                              data (js->clj json-response :keywordize-keys true)]
                        (set-state assoc :slug (:slug data))))
         redirect-link (str (.-origin js/location) "/" (:slug state) "/")]
-    (d/div {:class-name "bg-pink-500 grid place-items-center h-screen"}
+    (d/div {:class-name "bg-pink-100 grid place-items-center h-screen"}
      (if (and (:slug state) (not= "" (:slug state)))
        (d/div (d/a {:href redirect-link :target "_blank"} redirect-link))
        (d/div
