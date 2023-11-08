@@ -16,3 +16,4 @@ pom.xml.asc
 .shadow-cljs/
 resources/public/assets/js/*
 resources/public/assets/css/*
+.env
